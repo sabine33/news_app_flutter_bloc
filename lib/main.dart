@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_bloc.dart';
+import 'package:news_rss_app/blocs/news/thumbnail_bloc.dart';
 import 'package:news_rss_app/repository/news_repository.dart';
 
 import 'api/news_api.dart';
@@ -19,7 +20,8 @@ void main() {
             create: (context) => NewsBloc(NewsRepository(api: NewsApi()))),
         BlocProvider(
             create: (context) =>
-                UserBloc(userRepository: UserRepository(userApi: UserApi())))
+                UserBloc(userRepository: UserRepository(userApi: UserApi()))),
+        BlocProvider(create: (context) => ThumbnailBloc())
       ],
       child: NewsApp(),
     ),

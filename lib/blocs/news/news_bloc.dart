@@ -4,17 +4,15 @@ import '../../repository/news_repository.dart';
 import 'news_events.dart';
 import 'news_states.dart';
 
-class LoadingErrorState extends NewsState {}
-
-class NewsBloc extends Bloc<EuphoriaEvents, NewsState> {
+class NewsBloc extends Bloc<NewsEvents, NewsState> {
   final NewsRepository repository;
 
-  NewsBloc(this.repository) : super(LoadingState()) {
+  NewsBloc(this.repository) : super(NewsLoadingState()) {
     on<LoadNewsEvent>(_onLoadNews);
   }
   void _onLoadNews(state, emit) async {
-    emit(LoadingState());
+    emit(NewsLoadingState());
     final newsItems = await repository.getNewsFromRSS();
-    emit(LoadedState(newsItems));
+    emit(NewsLoadedState(newsItems));
   }
 }

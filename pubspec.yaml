@@ -42,6 +42,7 @@ dependencies:
   url_launcher:
   metadata_fetch:
   cached_network_image:
+  webview_flutter:
 
 dev_dependencies:
   flutter_test:

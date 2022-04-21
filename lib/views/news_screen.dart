@@ -24,11 +24,11 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (BuildContext context, state) {
-        if (state is LoadingState) {
+        if (state is NewsLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (state is LoadedState) {
+        if (state is NewsLoadedState) {
           return ListView.builder(
               itemCount: state.newsItems.length,
               itemBuilder: (context, index) {
@@ -37,8 +37,8 @@ class _NewsScreenState extends State<NewsScreen> {
                     padding: const EdgeInsets.all(8.0), child: NewsCard(item));
               });
         }
-        if (state is LoadingErrorState) {
-          return const Center(child: Text("Error Loading news"));
+        if (state is NewsErrorState) {
+          return Center(child: Text(state.message));
         }
         return Container();
       },

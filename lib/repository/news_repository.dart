@@ -19,7 +19,7 @@ class NewsRepository {
         content: e.content ?? '',
         enclosure: {},
         guid: '',
-        link: e.links!.first.href ?? '',
+        link: e.links!.first.href!, //!.first.href ?? '',
         thumbnail: ''));
     return newsList.toList();
   }

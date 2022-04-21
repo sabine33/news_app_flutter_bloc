@@ -1,3 +1,3 @@
-class EuphoriaEvents {}
+class NewsEvents {}
 
-class LoadNewsEvent extends EuphoriaEvents {}
+class LoadNewsEvent extends NewsEvents {}

@@ -2,9 +2,15 @@ import '../../models/news_model.dart';
 
 class NewsState {}
 
-class LoadingState extends NewsState {}
+//For News
+class NewsLoadingState extends NewsState {}
 
-class LoadedState extends NewsState {
+class NewsLoadedState extends NewsState {
   final List<NewsModel> newsItems;
-  LoadedState(this.newsItems);
+  NewsLoadedState(this.newsItems);
+}
+
+class NewsErrorState extends NewsState {
+  final String message;
+  NewsErrorState(this.message);
 }
