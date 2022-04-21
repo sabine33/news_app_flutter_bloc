@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../api/users_api.dart';
+import '../blocs/users/user_events.dart';
 import '../blocs/users/users_bloc.dart';
+import '../blocs/users/users_states.dart';
 import '../repository/user_repository.dart';
+import 'components/user_card.dart';
 
 class UsersList extends StatelessWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -44,18 +46,6 @@ class UsersList extends StatelessWidget {
                   }
                 })),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget getUserCard(User user) {
-    return Container(
-      width: 300,
-      child: Card(
-        child: ListTile(
-          title: Text(user.username),
-          subtitle: Text(user.email),
         ),
       ),
     );
