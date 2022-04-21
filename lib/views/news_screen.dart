@@ -46,7 +46,7 @@ class _NewsScreenState extends State<NewsScreen> {
                           if (await canLaunch(url)) {
                             await launch(url);
                           } else {
-                            throw "Could not open $url";
+                            throw "Could not open $url. Please make sure URL is valid.";
                           }
                         },
                         title: Text(
