@@ -11,9 +11,14 @@ class ThumbnailBloc extends Bloc<ThumbnailEvents, ThumbnailState> {
         _onLoadThumbnail(event, state, emit));
   }
   void _onLoadThumbnail(LoadThumbnailEvent event, state, emit) async {
-    emit(ThumbnailLoadingState());
-    final thumbnailURL =
-        await ThumbnailParser.getThumbnailUrl(event.url) ?? DEFAULT_THUMBNAIL;
-    emit(ThumbnailLoadedState(thumbnailURL));
+    try {
+      emit(ThumbnailLoadingState());
+
+      final thumbnailURL =
+          await ThumbnailParser.getThumbnailUrl(event.url) ?? DEFAULT_THUMBNAIL;
+      emit(ThumbnailLoadedState(thumbnailURL));
+    } catch (ex) {
+      emit(ThumbnailErrorState("Error loading thumbnail"));
+    }
   }
 }

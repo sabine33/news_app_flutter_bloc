@@ -1,6 +1,7 @@
+import 'package:html/parser.dart';
+
 import '../api/news_api.dart';
 import '../models/news_model.dart';
-import 'package:html/parser.dart';
 
 class NewsRepository {
   NewsApi api;
@@ -19,8 +20,15 @@ class NewsRepository {
         content: e.content ?? '',
         enclosure: {},
         guid: '',
-        link: e.links!.first.href!, //!.first.href ?? '',
+        link: getCleanUrl(e.links!.first.href!), //!.first.href ?? '',
         thumbnail: ''));
     return newsList.toList();
+  }
+
+  getCleanUrl(String url) {
+    print(url);
+    var uri = Uri.parse(url);
+    var urlParam = uri.queryParameters['url'];
+    return urlParam;
   }
 }

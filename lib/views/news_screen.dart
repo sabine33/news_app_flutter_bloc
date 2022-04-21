@@ -4,6 +4,8 @@ import 'package:news_rss_app/blocs/news/news_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_events.dart';
 
 import '../blocs/news/news_states.dart';
+import '../blocs/thumbnail/thumbnail_bloc.dart';
+import '../blocs/thumbnail/thumbnail_events.dart';
 import 'components/news_card.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -33,7 +35,11 @@ class _NewsScreenState extends State<NewsScreen> {
               itemBuilder: (context, index) {
                 var item = state.newsItems.elementAt(index);
                 return Padding(
-                    padding: const EdgeInsets.all(8.0), child: NewsCard(item));
+                    padding: const EdgeInsets.all(8.0),
+                    child: BlocProvider(
+                        create: (context) =>
+                            ThumbnailBloc()..add(LoadThumbnailEvent(item.link)),
+                        child: NewsCard(item)));
               });
         }
         if (state is NewsErrorState) {
