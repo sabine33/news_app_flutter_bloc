@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_events.dart';
+import 'package:news_rss_app/blocs/thumbnail/thumbnail_states.dart';
 
 import '../blocs/news/news_states.dart';
 import '../blocs/thumbnail/thumbnail_bloc.dart';
@@ -24,13 +25,21 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsBloc, NewsState>(
+    return BlocConsumer<NewsBloc, NewsState>(
+      listenWhen: (context, state) {
+        return state is NewsLoadedState || state is ThumbnailLoadedState;
+      },
+      listener: (context, state) {},
+      buildWhen: (context, state) {
+        return state is NewsLoadedState || state is ThumbnailLoadedState;
+      },
       builder: (BuildContext context, state) {
         if (state is NewsLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
         if (state is NewsLoadedState) {
           return ListView.builder(
+              cacheExtent: 9999,
               itemCount: state.newsItems.length,
               itemBuilder: (context, index) {
                 var item = state.newsItems.elementAt(index);
