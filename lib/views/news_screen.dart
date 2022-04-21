@@ -8,6 +8,7 @@ import 'package:news_rss_app/views/news_detail.dart';
 import '../blocs/news/news_states.dart';
 import '../blocs/thumbnail/thumbnail_bloc.dart';
 import '../blocs/thumbnail/thumbnail_events.dart';
+import '../helpers/constants.dart';
 import 'components/news_card.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -26,44 +27,57 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsBloc, NewsState>(
-      listenWhen: (context, state) {
-        return state is NewsLoadedState ||
-            state is ThumbnailLoadedState ||
-            State is NewsClickedState;
-      },
-      listener: (context, state) {
-        if (state is NewsClickedState) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => NewsDetail(url: state.news.link)));
-        }
-      },
-      buildWhen: (context, state) {
-        return state is NewsLoadedState || state is ThumbnailLoadedState;
-      },
-      builder: (BuildContext context, state) {
-        if (state is NewsLoadingState) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (state is NewsLoadedState) {
-          return ListView.builder(
-              cacheExtent: 9999,
-              itemCount: state.newsItems.length,
-              itemBuilder: (context, index) {
-                var item = state.newsItems.elementAt(index);
-                return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: BlocProvider(
-                        create: (blocContext) =>
-                            ThumbnailBloc()..add(LoadThumbnailEvent(item.link)),
-                        child: NewsCard(context.read(), item)));
-              });
-        }
-        if (state is NewsErrorState) {
-          return Center(child: Text(state.message));
-        }
-        return Container();
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(APP_NAME),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              context.read<NewsBloc>().add(LoadNewsEvent());
+            },
+          )
+        ],
+      ),
+      body: BlocConsumer<NewsBloc, NewsState>(
+        listenWhen: (context, state) {
+          return state is NewsLoadedState ||
+              state is ThumbnailLoadedState ||
+              state is NewsClickedState;
+        },
+        listener: (context, state) {
+          if (state is NewsClickedState) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => NewsDetailScreen(news: state.news)));
+          }
+        },
+        buildWhen: (context, state) {
+          return state is NewsLoadedState;
+        },
+        builder: (BuildContext context, state) {
+          if (state is NewsLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is NewsLoadedState) {
+            return ListView.builder(
+                cacheExtent: 9999,
+                itemCount: state.newsItems.length,
+                itemBuilder: (context, index) {
+                  var item = state.newsItems.elementAt(index);
+                  return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BlocProvider(
+                          create: (blocContext) => ThumbnailBloc()
+                            ..add(LoadThumbnailEvent(item.link)),
+                          child: NewsCard(context.read(), item)));
+                });
+          }
+          if (state is NewsErrorState) {
+            return Center(child: Text(state.message));
+          }
+          return Container();
+        },
+      ),
     );
   }
 }

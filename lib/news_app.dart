@@ -12,7 +12,6 @@ class NewsApp extends StatefulWidget {
 class _NewsAppState extends State<NewsApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Euphoria News App")), body: NewsScreen());
+    return NewsScreen();
   }
 }

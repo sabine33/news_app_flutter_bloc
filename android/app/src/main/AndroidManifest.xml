@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.news_rss_app">
+    package="com.tbo.news_rss_app">
    <application
         android:label="news_rss_app"
         android:name="${applicationName}"

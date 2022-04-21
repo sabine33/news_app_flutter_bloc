@@ -5,3 +5,4 @@ const double? TITLE_FONT_SIZE = 20;
 
 const String DEFAULT_THUMBNAIL =
     "https://www.messagetech.com/wp-content/themes/ml_mti/images/no-image.jpg";
+const APP_NAME = "Euphoria News";

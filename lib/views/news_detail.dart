@@ -1,16 +1,20 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class NewsDetail extends StatelessWidget {
-  final String url;
-  const NewsDetail({Key? key, required this.url}) : super(key: key);
+import '../models/news_model.dart';
+
+class NewsDetailScreen extends StatelessWidget {
+  final NewsModel news;
+  const NewsDetailScreen({Key? key, required this.news}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: WebView(initialUrl: this.url),
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(),
+        title: Text(news.title),
+      ),
+      body: WebView(initialUrl: this.news.link),
     );
   }
 }

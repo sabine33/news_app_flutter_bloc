@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "news_rss_app")
-set(APPLICATION_ID "com.example.news_rss_app")
+set(APPLICATION_ID "com.tbo.news_rss_app")
 
 cmake_policy(SET CMP0063 NEW)
 
