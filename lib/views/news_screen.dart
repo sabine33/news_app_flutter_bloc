@@ -35,6 +35,7 @@ class _NewsScreenState extends State<NewsScreen> {
             icon: Icon(Icons.refresh),
             onPressed: () {
               context.read<NewsBloc>().add(LoadNewsEvent());
+              print("NEWS LOADING");
             },
           )
         ],
@@ -43,7 +44,8 @@ class _NewsScreenState extends State<NewsScreen> {
         listenWhen: (context, state) {
           return state is NewsLoadedState ||
               state is ThumbnailLoadedState ||
-              state is NewsClickedState;
+              state is NewsClickedState ||
+              state is NewsLoadingState;
         },
         listener: (context, state) {
           if (state is NewsClickedState) {
@@ -52,7 +54,7 @@ class _NewsScreenState extends State<NewsScreen> {
           }
         },
         buildWhen: (context, state) {
-          return state is NewsLoadedState;
+          return state is NewsLoadedState || state is NewsLoadingState;
         },
         builder: (BuildContext context, state) {
           if (state is NewsLoadingState) {
