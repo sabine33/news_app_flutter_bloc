@@ -9,11 +9,11 @@ class NewsRepository {
   Future<List<NewsModel>> getNewsFromRSS() async {
     var newsStuffs = await NewsApi().getNewsData();
 
-    //sanitize title
     var newsList = newsStuffs.map((e) => NewsModel(
         author: '',
         description: e.summary ?? '',
         pubDate: e.published ?? '',
+        //sanitize title
         title: parseFragment(e.title).text!,
         categories: e.categories ?? [],
         content: e.content ?? '',
