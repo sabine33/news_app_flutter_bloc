@@ -40,6 +40,8 @@ dependencies:
   dio:
   html:
   url_launcher:
+  metadata_fetch:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:
