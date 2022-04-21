@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:news_rss_app/blocs/news/thumbnail_events.dart';
-import 'package:news_rss_app/blocs/news/thumbnail_states.dart';
-import 'package:news_rss_app/helpers/constants.dart';
-import 'package:news_rss_app/helpers/thumbnail_parser.dart';
+
+import '../../helpers/constants.dart';
+import '../../helpers/thumbnail_parser.dart';
+import 'thumbnail_events.dart';
+import 'thumbnail_states.dart';
 
 class ThumbnailBloc extends Bloc<ThumbnailEvents, ThumbnailState> {
   ThumbnailBloc() : super(ThumbnailLoadingState()) {

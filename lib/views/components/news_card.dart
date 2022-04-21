@@ -1,9 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_rss_app/blocs/news/thumbnail_bloc.dart';
-import 'package:news_rss_app/blocs/news/thumbnail_states.dart';
-import 'package:news_rss_app/helpers/thumbnail_parser.dart';
 import 'package:news_rss_app/models/news_model.dart';
 import 'package:news_rss_app/views/components/thumbnail_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
