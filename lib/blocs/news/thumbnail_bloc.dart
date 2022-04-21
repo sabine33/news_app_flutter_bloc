@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:news_rss_app/blocs/news/thumbnail_events.dart';
 import 'package:news_rss_app/blocs/news/thumbnail_states.dart';
+import 'package:news_rss_app/helpers/constants.dart';
 import 'package:news_rss_app/helpers/thumbnail_parser.dart';
 
 class ThumbnailBloc extends Bloc<ThumbnailEvents, ThumbnailState> {
@@ -10,7 +11,8 @@ class ThumbnailBloc extends Bloc<ThumbnailEvents, ThumbnailState> {
   }
   void _onLoadThumbnail(LoadThumbnailEvent event, state, emit) async {
     emit(ThumbnailLoadingState());
-    final thumbnail = await ThumbnailParser.getThumbnailUrl(event.url);
-    emit(ThumbnailLoadedState(thumbnail));
+    final thumbnailURL =
+        await ThumbnailParser.getThumbnailUrl(event.url) ?? DEFAULT_THUMBNAIL;
+    emit(ThumbnailLoadedState(thumbnailURL));
   }
 }

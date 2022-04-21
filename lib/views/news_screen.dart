@@ -27,7 +27,6 @@ class _NewsScreenState extends State<NewsScreen> {
         if (state is NewsLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
-
         if (state is NewsLoadedState) {
           return ListView.builder(
               itemCount: state.newsItems.length,
