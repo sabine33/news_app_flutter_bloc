@@ -1,4 +1,8 @@
 # news_app_flutter_bloc
 
-This application loads news from RSS feed using Flutter Bloc library.
+This simple application loads news from RSS feed using Flutter Bloc library.
 
+#Todos
+
+Adding Image thumbnail
+Open news inside application
