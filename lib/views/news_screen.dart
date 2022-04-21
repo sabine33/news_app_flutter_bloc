@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_bloc.dart';
 import 'package:news_rss_app/blocs/news/news_events.dart';
 import 'package:news_rss_app/blocs/thumbnail/thumbnail_states.dart';
+import 'package:news_rss_app/views/news_detail.dart';
 
 import '../blocs/news/news_states.dart';
 import '../blocs/thumbnail/thumbnail_bloc.dart';
@@ -27,9 +28,16 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<NewsBloc, NewsState>(
       listenWhen: (context, state) {
-        return state is NewsLoadedState || state is ThumbnailLoadedState;
+        return state is NewsLoadedState ||
+            state is ThumbnailLoadedState ||
+            State is NewsClickedState;
       },
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is NewsClickedState) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => NewsDetail(url: state.news.link)));
+        }
+      },
       buildWhen: (context, state) {
         return state is NewsLoadedState || state is ThumbnailLoadedState;
       },
@@ -46,9 +54,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BlocProvider(
-                        create: (context) =>
+                        create: (blocContext) =>
                             ThumbnailBloc()..add(LoadThumbnailEvent(item.link)),
-                        child: NewsCard(item)));
+                        child: NewsCard(context.read(), item)));
               });
         }
         if (state is NewsErrorState) {

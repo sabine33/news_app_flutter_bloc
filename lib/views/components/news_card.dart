@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:news_rss_app/blocs/news/news_bloc.dart';
+import 'package:news_rss_app/blocs/news/news_events.dart';
 import 'package:news_rss_app/models/news_model.dart';
 import 'package:news_rss_app/views/components/thumbnail_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../helpers/constants.dart';
 
-Widget NewsCard(NewsModel item) {
+Widget NewsCard(NewsBloc bloc, NewsModel item) {
   return InkWell(
       onTap: () async {
-        final url = item.link;
-        if (await canLaunch(url)) {
-          await launch(url);
-        } else {
-          throw "Could not open $url. Please make sure URL is valid.";
-        }
+        bloc.add(NewsOpenedEvent(item));
+        // final url = item.link;
+
+        // if (await canLaunch(url)) {
+        //   await launch(url);
+        // } else {
+        //   throw "Could not open $url. Please make sure URL is valid.";
+        // }
       },
       child: Card(
         elevation: 4,

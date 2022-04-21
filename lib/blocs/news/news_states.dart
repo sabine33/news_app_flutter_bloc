@@ -14,3 +14,8 @@ class NewsErrorState extends NewsState {
   final String message;
   NewsErrorState(this.message);
 }
+
+class NewsClickedState extends NewsState {
+  final NewsModel news;
+  NewsClickedState(this.news);
+}

@@ -9,6 +9,7 @@ class NewsBloc extends Bloc<NewsEvents, NewsState> {
 
   NewsBloc(this.repository) : super(NewsLoadingState()) {
     on<LoadNewsEvent>(_onLoadNews);
+    on<NewsOpenedEvent>((state, emit) => emit(NewsClickedState(state.news)));
   }
   void _onLoadNews(state, emit) async {
     emit(NewsLoadingState());
