@@ -20,16 +20,22 @@ Widget NewsCard(NewsBloc bloc, NewsModel item) {
       },
       child: Card(
         elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(children: [
-            ThumbnailWidget(url: item.link),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: ThumbnailWidget(url: item.link)),
             SizedBox(
               height: 10,
             ),
             Text(
               item.title,
-              style: const TextStyle(fontSize: TITLE_FONT_SIZE),
+              style: const TextStyle(
+                  fontSize: TITLE_FONT_SIZE, fontWeight: FontWeight.bold),
             ),
           ]),
         ),

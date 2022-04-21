@@ -13,7 +13,8 @@ import 'repository/user_repository.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(),
+    theme:
+        ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.deepPurple)),
     home: MultiBlocProvider(
       providers: [
         BlocProvider<NewsBloc>(
