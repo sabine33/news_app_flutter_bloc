@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_rss_app/blocs/news_bloc.dart';
-import 'package:news_rss_app/blocs/news_events.dart';
+import 'package:news_rss_app/blocs/news/news_bloc.dart';
+import 'package:news_rss_app/blocs/news/news_events.dart';
 
-import '../blocs/news_states.dart';
+import '../blocs/news/news_states.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);

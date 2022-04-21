@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:news_rss_app/views/news_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_rss_app/blocs/news/news_bloc.dart';
+import 'package:news_rss_app/repository/news_repository.dart';
+
+import 'api/news_api.dart';
+import 'api/users_api.dart';
+import 'blocs/users/users_bloc.dart';
+import 'news_app.dart';
+import 'repository/user_repository.dart';
 
 void main() {
-  runApp(const NewsScreen());
+  runApp(MaterialApp(
+    theme: ThemeData(),
+    home: MultiBlocProvider(
+      providers: [
+        BlocProvider<NewsBloc>(
+            create: (context) => NewsBloc(NewsRepository(api: NewsApi()))),
+        BlocProvider(
+            create: (context) =>
+                UserBloc(userRepository: UserRepository(userApi: UserApi())))
+      ],
+      child: NewsApp(),
+    ),
+  ));
 }

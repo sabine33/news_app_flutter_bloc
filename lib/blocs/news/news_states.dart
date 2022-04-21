@@ -1,4 +1,4 @@
-import '../models/news_model.dart';
+import '../../models/news_model.dart';
 
 class NewsState {}
 
